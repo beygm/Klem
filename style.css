@@ -506,3 +506,98 @@ footer {
     padding: 50px 10px;
   }
 }
+/* === REESTRUCTURA RESPONSIVA PARA REFERENCIAS DISPONIBLES === */
+.telas-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 25px;
+  margin-top: 40px;
+  justify-items: center;
+  align-items: stretch;
+  transition: all 0.3s ease;
+}
+
+/* Cada item dentro */
+.tela-item {
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 15px;
+  backdrop-filter: blur(10px);
+  text-align: center;
+  padding: 20px;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  width: 100%;
+  max-width: 300px;
+}
+
+.tela-item:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+}
+
+/* Imagen dentro del item */
+.tela-item img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 10px;
+  transition: transform 0.4s ease;
+}
+
+.tela-item:hover img {
+  transform: scale(1.1);
+}
+
+/* Título y precios */
+.tela-item h3 {
+  color: #6a3dfc;
+  margin-top: 10px;
+  font-weight: 600;
+}
+
+.tela-item p {
+  font-size: 0.9em;
+  color: #555;
+}
+
+.precio {
+  display: block;
+  margin-top: 8px;
+  color: #ff6ad5;
+  font-weight: 700;
+}
+
+.referencia {
+  display: block;
+  color: #777;
+  font-size: 0.85em;
+}
+
+/* ✅ Vista escritorio: referencias en fila */
+@media (min-width: 900px) {
+  .telas-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 35px;
+  }
+
+  .tela-item {
+    width: 280px;
+    flex: 0 0 auto;
+  }
+}
+
+/* ✅ Vista móvil: se mantienen apiladas */
+@media (max-width: 899px) {
+  .telas-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 25px;
+  }
+
+  .tela-item {
+    width: 90%;
+    margin: 0 auto;
+  }
+}
