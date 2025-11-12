@@ -13,11 +13,33 @@ body {
   );
   background-attachment: fixed;
   background-size: cover;
+  transition: background 0.3s ease;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* Luz suave que sigue el cursor */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at var(--x, 50%) var(--y, 50%), rgba(255,255,255,0.25), transparent 50%);
+  pointer-events: none;
+  transition: background 0.1s ease;
+  z-index: 1;
+}
+
+header, main, section, footer {
+  position: relative;
+  z-index: 2;
 }
 
 /* === HERO (Pantalla completa inicial) === */
 .hero {
-  height: 100vh; /* ocupa toda la pantalla */
+  height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -25,9 +47,9 @@ body {
   text-align: center;
   background: linear-gradient(135deg, rgba(240, 229, 255, 0.7), rgba(255, 255, 255, 0.6));
   backdrop-filter: blur(10px);
-  position: relative;
   overflow: hidden;
   animation: fadeIn 1.5s ease;
+  position: relative;
 }
 
 .hero-content {
@@ -40,11 +62,13 @@ body {
   margin-bottom: 30px;
   border-radius: 12px;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-  transition: transform 0.4s ease;
+  transition: transform 0.6s ease, filter 0.3s ease;
+  animation: float 3s ease-in-out infinite;
 }
 
 .hero-logo:hover {
-  transform: scale(1.05);
+  transform: scale(1.08) rotate(2deg);
+  filter: brightness(1.1);
 }
 
 .hero h1 {
@@ -53,17 +77,13 @@ body {
   font-weight: 600;
   line-height: 1.4;
   text-shadow: 0 2px 8px rgba(255, 255, 255, 0.6);
-  opacity: 0;
-  animation: heroTitleEntrance 2s ease forwards 0.8s;
 }
 
-/* Animación del título del hero */
-@keyframes heroTitleEntrance {
-  0% { opacity: 0; transform: translateY(40px) scale(0.9); }
-  100% { opacity: 1; transform: translateY(0) scale(1); }
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
 }
 
-/* Efectos suaves al entrar */
 @keyframes slideUp {
   0% { opacity: 0; transform: translateY(40px); }
   100% { opacity: 1; transform: translateY(0); }
@@ -72,112 +92,6 @@ body {
 @keyframes fadeIn {
   0% { opacity: 0; }
   100% { opacity: 1; }
-}
-
-/* === LOGO ANIMADO (Entrada, flotación y hover brillante) === */
-.logo {
-  width: 200px;
-  animation: logoEntrance 1.8s ease-out forwards, logoFloat 4s ease-in-out infinite;
-  transition: transform 0.4s ease, filter 0.4s ease;
-  filter: drop-shadow(0 4px 10px rgba(255, 255, 255, 0.4));
-}
-
-/* Entrada con rebote suave */
-@keyframes logoEntrance {
-  0% {
-    opacity: 0;
-    transform: scale(0.6) translateY(-60px);
-  }
-  60% {
-    opacity: 1;
-    transform: scale(1.15) translateY(10px);
-  }
-  100% {
-    transform: scale(1) translateY(0);
-  }
-}
-
-/* Movimiento flotante constante */
-@keyframes logoFloat {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
-}
-
-/* Efecto al pasar el mouse */
-.logo:hover {
-  transform: scale(1.12) rotate(2deg);
-  filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.7))
-          drop-shadow(0 0 25px rgba(255, 200, 250, 0.6));
-}
-
-/* === CATÁLOGO === */
-.catalogo-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 30px;
-  margin-top: 40px;
-  justify-items: center;
-}
-
-.catalogo-grid .item {
-  background: rgba(255, 255, 255, 0.5);
-  backdrop-filter: blur(8px);
-  border-radius: 15px;
-  overflow: hidden;
-  text-align: center;
-  padding-bottom: 20px;
-  transition: transform 0.4s ease, box-shadow 0.4s ease;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-}
-
-.catalogo-grid .item:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.12);
-}
-
-.catalogo-grid img {
-  width: 100%;
-  height: 380px;
-  object-fit: contain;
-  background: transparent;
-  border-bottom: 2px solid #ffffff;
-  transition: transform 0.4s ease, box-shadow 0.4s ease;
-}
-
-.catalogo-grid h3 {
-  margin-top: 15px;
-  color: #6a3dfc;
-  font-weight: 600;
-}
-
-.catalogo-grid p {
-  color: #444;
-  padding: 0 15px;
-  font-size: 0.95em;
-}
-
-.lista-telas {
-  list-style: none;
-  padding: 0;
-  margin-top: 40px;
-  font-size: 1em;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 15px;
-  justify-content: center;
-}
-
-.lista-telas li {
-  background: rgba(255,255,255,0.6);
-  border-radius: 20px;
-  padding: 8px 18px;
-  box-shadow: 0 3px 8px rgba(0,0,0,0.05);
-  transition: transform 0.3s;
-}
-
-.lista-telas li:hover {
-  transform: scale(1.05);
-  background: rgba(255,255,255,0.8);
 }
 
 /* === NAVBAR === */
@@ -227,6 +141,40 @@ body {
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
 }
 
+/* === CATÁLOGO === */
+.catalogo-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+  margin-top: 40px;
+  justify-items: center;
+}
+
+.catalogo-grid .item {
+  background: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(8px);
+  border-radius: 15px;
+  overflow: hidden;
+  text-align: center;
+  padding-bottom: 20px;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.catalogo-grid .item:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+}
+
+.catalogo-grid img {
+  width: 100%;
+  height: 380px;
+  object-fit: contain;
+  background: transparent;
+  border-bottom: 2px solid #ffffff;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
 /* === GUIA DE COLORES === */
 .color-bar {
   display: flex;
@@ -273,13 +221,15 @@ body {
   opacity: 1;
 }
 
-/* === SECCIÓN TELAS === */
+/* === TELAS / REFERENCIAS DISPONIBLES === */
 .telas-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 25px;
   margin-top: 40px;
   justify-items: center;
+  align-items: stretch;
+  transition: all 0.3s ease;
 }
 
 .tela-item {
@@ -292,6 +242,11 @@ body {
   box-shadow: 0 4px 12px rgba(0,0,0,0.08);
   width: 90%;
   max-width: 300px;
+}
+
+.tela-item:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.15);
 }
 
 .tela-item img {
@@ -330,250 +285,19 @@ body {
   font-size: 0.85em;
 }
 
-/* === FOOTER === */
-footer {
-  text-align: center;
-  padding: 20px;
-  background: rgba(255,255,255,0.7);
-  box-shadow: 0 -2px 8px rgba(0,0,0,0.05);
-  border-radius: 15px 15px 0 0;
-  color: #5a4a7f;
+/* === CONTACTO / BOTONES === */
+.contact-instagram a:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(225, 48, 108, 0.4);
 }
 
-/* === EFECTO INTERACTIVO HERO === */
-.hero::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: radial-gradient(circle at var(--x, 50%) var(--y, 50%), rgba(255, 255, 255, 0.4), transparent 50%);
-  transition: background 0.1s ease;
-  z-index: 1;
-  pointer-events: none;
+.contact-instagram a:hover,
+.contact-whatsapp a:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
 }
 
-body {
-  transition: background 0.3s ease;
-}
-
-.hero-content {
-  position: relative;
-  z-index: 2;
-}
-
-/* === EFECTO GLOBAL INTERACTIVO === */
-body::before {
-  content: "";
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: radial-gradient(circle at var(--x, 50%) var(--y, 50%), rgba(255,255,255,0.25), transparent 50%);
-  pointer-events: none;
-  transition: background 0.1s ease;
-  z-index: 1;
-}
-
-header, main, section, footer {
-  position: relative;
-  z-index: 2;
-}
-
-/* === CORRECCIÓN GLOBAL MÓVIL Y CENTRADO === */
-
-/* Previene desplazamiento y solapamiento */
-html, body {
-  width: 100%;
-  margin: 0;
-  padding: 0;
-  overflow-x: hidden;
-  box-sizing: border-box;
-}
-
-/* Evita que se superpongan capas */
-*,
-*::before,
-*::after {
-  box-sizing: inherit;
-}
-
-/* Ajusta secciones principales */
-.hero,
-.section,
-.catalogo-grid,
-.telas-grid,
-footer {
-  width: 100%;
-  max-width: 100vw;
-  margin: 0 auto;
-  overflow: visible;
-}
-
-/* Corrige el hero y logo centrado */
-.hero {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  padding: 60px 15px;
-}
-
-.hero-logo {
-  width: 160px;
-  height: auto;
-  display: block;
-  margin: 0 auto 20px;
-  animation: float 3s ease-in-out infinite;
-}
-
-/* Evita que el texto del hero se monte */
-.hero-content {
-  max-width: 90%;
-  z-index: 3;
-  position: relative;
-}
-
-/* Corrige catálogo y telas en móviles */
-.catalogo-grid,
-.telas-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 30px;
-  justify-items: center;
-  padding: 0 10px;
-}
-
-/* Asegura imágenes responsivas */
-.catalogo-grid img,
-.telas-grid img {
-  width: 100%;
-  height: auto;
-  object-fit: contain;
-  border-radius: 10px;
-}
-
-/* Centra y organiza el navbar */
-.navbar {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-  text-align: center;
-  padding: 10px;
-  position: sticky;
-  top: 0;
-  background: rgba(255,255,255,0.7);
-  z-index: 100;
-  border-radius: 0 0 12px 12px;
-}
-
-/* Ajusta títulos y párrafos para no romper diseño */
-.section h2,
-.section h3,
-.section p {
-  word-wrap: break-word;
-  margin: 0 auto 15px;
-  max-width: 90%;
-}
-
-/* FOOTER ajustado */
-footer {
-  font-size: 0.9rem;
-  line-height: 1.5;
-  padding: 20px 10px;
-}
-
-/* Ajuste específico para pantallas muy pequeñas */
-@media (max-width: 480px) {
-  .hero {
-    padding: 40px 10px;
-  }
-  .hero-logo {
-    width: 130px;
-  }
-  .hero h1 {
-    font-size: 1.4rem;
-  }
-  .navbar a {
-    font-size: 0.9rem;
-  }
-  .section {
-    padding: 50px 10px;
-  }
-}
-/* === REESTRUCTURA RESPONSIVA PARA REFERENCIAS DISPONIBLES === */
-.telas-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 25px;
-  margin-top: 40px;
-  justify-items: center;
-  align-items: stretch;
-  transition: all 0.3s ease;
-}
-
-/* Cada item dentro */
-.tela-item {
-  background: rgba(255, 255, 255, 0.5);
-  border-radius: 15px;
-  backdrop-filter: blur(10px);
-  text-align: center;
-  padding: 20px;
-  transition: transform 0.4s ease, box-shadow 0.4s ease;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-  width: 100%;
-  max-width: 300px;
-}
-
-.tela-item:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 6px 16px rgba(0,0,0,0.15);
-}
-
-/* Imagen dentro del item */
-.tela-item img {
-  width: 100%;
-  height: 200px;
-  object-fit: cover;
-  border-radius: 10px;
-  transition: transform 0.4s ease;
-}
-
-.tela-item:hover img {
-  transform: scale(1.1);
-}
-
-/* Título y precios */
-.tela-item h3 {
-  color: #6a3dfc;
-  margin-top: 10px;
-  font-weight: 600;
-}
-
-.tela-item p {
-  font-size: 0.9em;
-  color: #555;
-}
-
-.precio {
-  display: block;
-  margin-top: 8px;
-  color: #ff6ad5;
-  font-weight: 700;
-}
-
-.referencia {
-  display: block;
-  color: #777;
-  font-size: 0.85em;
-}
-
-/* ✅ Vista escritorio: referencias en fila */
+/* === RESPONSIVO === */
 @media (min-width: 900px) {
   .telas-grid {
     display: flex;
@@ -588,16 +312,60 @@ footer {
   }
 }
 
-/* ✅ Vista móvil: se mantienen apiladas */
-@media (max-width: 899px) {
-  .telas-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 25px;
+@media (max-width: 768px) {
+  .hero h1 {
+    font-size: 1.6rem;
+    padding: 0 15px;
   }
 
-  .tela-item {
-    width: 90%;
-    margin: 0 auto;
+  .hero-logo {
+    width: 130px;
+    margin-bottom: 20px;
+  }
+
+  .navbar {
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 10px;
+  }
+
+  .catalogo-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .catalogo-grid img {
+    height: 280px;
+  }
+
+  .section {
+    padding: 60px 10px;
+  }
+
+  footer {
+    font-size: 0.9rem;
+  }
+
+  .telas-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero h1 {
+    font-size: 1.3rem;
+  }
+
+  .navbar a {
+    font-size: 0.9rem;
+  }
+
+  .lista-telas {
+    flex-direction: column;
+  }
+
+  .lista-telas li {
+    width: 100%;
+    text-align: center;
   }
 }
