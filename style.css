@@ -458,9 +458,9 @@ section, .section, .hero, .catalogo-grid, .telas-grid, .navbar, footer {
   justify-items: center;
   padding: 0 10px;
 }
-
-/* Ajusta el logo y el hero en móviles */
-@media (max-width: 768px) {
+/* 
+Ajusta el logo y el hero en móviles */
+/* @media (max-width: 768px) {
   .hero {
     padding: 40px 15px;
     text-align: center;
@@ -498,6 +498,6 @@ section, .section, .hero, .catalogo-grid, .telas-grid, .navbar, footer {
 }
 
 /* Evita saltos o zooms raros en el viewport móvil */
-meta[name="viewport"] {
+/* meta[name="viewport"] {
   content: "width=device-width, initial-scale=1.0, maximum-scale=1.0";
-}
+} */
