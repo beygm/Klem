@@ -14,6 +14,7 @@ body {
   background-attachment: fixed;
   background-size: cover;
 }
+
 /* === HERO (Pantalla completa inicial) === */
 .hero {
   height: 100vh; /* ocupa toda la pantalla */
@@ -52,6 +53,14 @@ body {
   font-weight: 600;
   line-height: 1.4;
   text-shadow: 0 2px 8px rgba(255, 255, 255, 0.6);
+  opacity: 0;
+  animation: heroTitleEntrance 2s ease forwards 0.8s;
+}
+
+/* Animación del título del hero */
+@keyframes heroTitleEntrance {
+  0% { opacity: 0; transform: translateY(40px) scale(0.9); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
 }
 
 /* Efectos suaves al entrar */
@@ -65,6 +74,42 @@ body {
   100% { opacity: 1; }
 }
 
+/* === LOGO ANIMADO (Entrada, flotación y hover brillante) === */
+.logo {
+  width: 200px;
+  animation: logoEntrance 1.8s ease-out forwards, logoFloat 4s ease-in-out infinite;
+  transition: transform 0.4s ease, filter 0.4s ease;
+  filter: drop-shadow(0 4px 10px rgba(255, 255, 255, 0.4));
+}
+
+/* Entrada con rebote suave */
+@keyframes logoEntrance {
+  0% {
+    opacity: 0;
+    transform: scale(0.6) translateY(-60px);
+  }
+  60% {
+    opacity: 1;
+    transform: scale(1.15) translateY(10px);
+  }
+  100% {
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* Movimiento flotante constante */
+@keyframes logoFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+/* Efecto al pasar el mouse */
+.logo:hover {
+  transform: scale(1.12) rotate(2deg);
+  filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.7))
+          drop-shadow(0 0 25px rgba(255, 200, 250, 0.6));
+}
+
 /* === CATÁLOGO === */
 .catalogo-grid {
   display: grid;
@@ -73,7 +118,6 @@ body {
   margin-top: 40px;
   justify-items: center;
 }
-
 
 .catalogo-grid .item {
   background: rgba(255, 255, 255, 0.5);
@@ -93,9 +137,11 @@ body {
 
 .catalogo-grid img {
   width: 100%;
-  height: 340px;
-  object-fit: cover;
-  border-bottom: 2px solid #e0d9f7;
+  height: 380px;
+  object-fit: contain;
+  background: transparent;
+  border-bottom: 2px solid #ffffff;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
 }
 
 .catalogo-grid h3 {
@@ -132,29 +178,6 @@ body {
 .lista-telas li:hover {
   transform: scale(1.05);
   background: rgba(255,255,255,0.8);
-}
-
-/* === ENCABEZADO === */
-header.hero {
-  text-align: center;
-  padding: 100px 20px;
-  color: #4a3b5f;
-  background: rgba(255, 255, 255, 0.4);
-  backdrop-filter: blur(10px);
-  border-radius: 20px;
-  margin: 30px auto;
-  width: 90%;
-  box-shadow: 0 4px 25px rgba(0, 0, 0, 0.1);
-}
-
-.logo {
-  width: 200px;
-  animation: float 3s ease-in-out infinite;
-}
-
-@keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
 }
 
 /* === NAVBAR === */
@@ -204,179 +227,6 @@ header.hero {
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
 }
 
-/* === GALERÍA === */
-.galeria-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 20px;
-  margin-top: 20px;
-}
-
-.galeria-grid img {
-  width: 100%;
-  border-radius: 12px;
-  transition: transform 0.4s ease, box-shadow 0.4s ease;
-}
-
-.galeria-grid img:hover {
-  transform: scale(1.05);
-  box-shadow: 0 4px 20px rgba(0,0,0,0.15);
-}
-
-/* === FOOTER === */
-footer {
-  text-align: center;
-  padding: 20px;
-  background: rgba(255,255,255,0.7);
-  box-shadow: 0 -2px 8px rgba(0,0,0,0.05);
-  border-radius: 15px 15px 0 0;
-  color: #5a4a7f;
-}
-/* === EFECTO INTERACTIVO HERO === */
-.hero {
-  position: relative;
-  background: radial-gradient(circle at center, #fff6b3, #f8d6ff, #c6c2ff);
-  transition: background 0.2s ease;
-  overflow: hidden;
-}
-
-/* Luz suave que sigue el mouse */
-.hero::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: radial-gradient(circle at var(--x, 50%) var(--y, 50%), rgba(255, 255, 255, 0.4), transparent 50%);
-  transition: background 0.1s ease;
-  z-index: 1;
-  pointer-events: none;
-}
-body {
-  transition: background 0.3s ease;
-}
-
-.hero-content {
-  position: relative;
-  z-index: 2;
-}
-/* === EFECTO DE COLOR INTERACTIVO GLOBAL === */
-body {
-  background: radial-gradient(circle at center, #fff6b3, #f8d6ff, #c6c2ff);
-  transition: background 0.2s ease;
-  overflow-x: hidden;
-  position: relative;
-}
-
-/* Luz suave que sigue el cursor */
-body::before {
-  content: "";
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: radial-gradient(circle at var(--x, 50%) var(--y, 50%), rgba(255,255,255,0.3), transparent 50%);
-  pointer-events: none;
-  transition: background 0.1s ease;
-  z-index: 1;
-}
-
-/* Asegura que el contenido quede por encima */
-main, header, section, footer {
-  position: relative;
-  z-index: 2;
-}
-/* === EFECTO GLOBAL INTERACTIVO DE COLOR === */
-body {
-  background: radial-gradient(circle at center, #fff6b3, #f8d6ff, #c6c2ff);
-  transition: background 0.3s ease;
-  overflow-x: hidden;
-  position: relative;
-}
-
-/* Luz suave que sigue al cursor */
-body::before {
-  content: "";
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: radial-gradient(circle at var(--x, 50%) var(--y, 50%), rgba(255,255,255,0.25), transparent 50%);
-  pointer-events: none;
-  transition: background 0.1s ease;
-  z-index: 1;
-}
-
-/* Asegura que todo el contenido quede encima */
-header, main, section, footer {
-  position: relative;
-  z-index: 2;
-}
-/* === AJUSTES PARA CELULAR === */
-@media (max-width: 768px) {
-  .hero h1 {
-    font-size: 1.6rem;
-    padding: 0 15px;
-  }
-
-  .hero-logo {
-    width: 130px;
-    margin-bottom: 20px;
-  }
-
-  .navbar {
-    flex-wrap: wrap;
-    gap: 10px;
-    padding: 10px;
-  }
-
-  .catalogo-grid {
-    grid-template-columns: 1fr;
-    gap: 20px;
-  }
-
-  .catalogo-grid img {
-    height: 280px;
-  }
-
-  .section {
-    padding: 60px 10px;
-  }
-
-  footer {
-    font-size: 0.9rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .hero h1 {
-    font-size: 1.3rem;
-  }
-
-  .navbar a {
-    font-size: 0.9rem;
-  }
-
-  .lista-telas {
-    flex-direction: column;
-  }
-
-  .lista-telas li {
-    width: 100%;
-    text-align: center;
-  }
-}
-.catalogo-grid img {
-  width: 100%;
-  height: 380px;
-  object-fit: contain; /* evita cortes */
-  background: transparent;
-  border-bottom: 2px solid #ffffff;
-  transition: transform 0.4s ease, box-shadow 0.4s ease;
-}
 /* === GUIA DE COLORES === */
 .color-bar {
   display: flex;
@@ -403,7 +253,6 @@ header, main, section, footer {
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
 }
 
-/* Nombre del color flotante */
 .color::after {
   content: attr(data-nombre);
   position: absolute;
@@ -480,14 +329,110 @@ header, main, section, footer {
   color: #777;
   font-size: 0.85em;
 }
-/* boton de inta */
-.contact-instagram a:hover {
-  transform: scale(1.05);
-  box-shadow: 0 4px 12px rgba(225, 48, 108, 0.4);
-}
-.contact-instagram a:hover,
-.contact-whatsapp a:hover {
-  transform: scale(1.05);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+
+/* === FOOTER === */
+footer {
+  text-align: center;
+  padding: 20px;
+  background: rgba(255,255,255,0.7);
+  box-shadow: 0 -2px 8px rgba(0,0,0,0.05);
+  border-radius: 15px 15px 0 0;
+  color: #5a4a7f;
 }
 
+/* === EFECTO INTERACTIVO HERO === */
+.hero::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at var(--x, 50%) var(--y, 50%), rgba(255, 255, 255, 0.4), transparent 50%);
+  transition: background 0.1s ease;
+  z-index: 1;
+  pointer-events: none;
+}
+
+body {
+  transition: background 0.3s ease;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+}
+
+/* === EFECTO GLOBAL INTERACTIVO === */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at var(--x, 50%) var(--y, 50%), rgba(255,255,255,0.25), transparent 50%);
+  pointer-events: none;
+  transition: background 0.1s ease;
+  z-index: 1;
+}
+
+header, main, section, footer {
+  position: relative;
+  z-index: 2;
+}
+
+/* === AJUSTES PARA CELULAR === */
+@media (max-width: 768px) {
+  .hero h1 {
+    font-size: 1.6rem;
+    padding: 0 15px;
+  }
+
+  .hero-logo {
+    width: 130px;
+    margin-bottom: 20px;
+  }
+
+  .navbar {
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 10px;
+  }
+
+  .catalogo-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .catalogo-grid img {
+    height: 280px;
+  }
+
+  .section {
+    padding: 60px 10px;
+  }
+
+  footer {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero h1 {
+    font-size: 1.3rem;
+  }
+
+  .navbar a {
+    font-size: 0.9rem;
+  }
+
+  .lista-telas {
+    flex-direction: column;
+  }
+
+  .lista-telas li {
+    width: 100%;
+    text-align: center;
+  }
+}
