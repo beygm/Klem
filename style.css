@@ -480,3 +480,8 @@ header, main, section, footer {
   color: #777;
   font-size: 0.85em;
 }
+/* boton de inta */
+.contact-instagram a:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(225, 48, 108, 0.4);
+}
