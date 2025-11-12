@@ -485,3 +485,9 @@ header, main, section, footer {
   transform: scale(1.05);
   box-shadow: 0 4px 12px rgba(225, 48, 108, 0.4);
 }
+.contact-instagram a:hover,
+.contact-whatsapp a:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
