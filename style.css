@@ -1,0 +1,425 @@
+/* === KLEM ESTILO ACTUALIZADO === */
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  color: #333;
+  scroll-behavior: smooth;
+  background: radial-gradient(circle at center,
+    #fff6b3 0%,     /* amarillo pastel */
+    #f8d6ff 35%,    /* lila rosado */
+    #c6c2ff 65%,    /* lila azulado */
+    #b8a7f3 85%,    /* violeta suave */
+    #f2b9d9 100%    /* rosado claro */
+  );
+  background-attachment: fixed;
+  background-size: cover;
+}
+/* === HERO (Pantalla completa inicial) === */
+.hero {
+  height: 100vh; /* ocupa toda la pantalla */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+  background: linear-gradient(135deg, rgba(240, 229, 255, 0.7), rgba(255, 255, 255, 0.6));
+  backdrop-filter: blur(10px);
+  position: relative;
+  overflow: hidden;
+  animation: fadeIn 1.5s ease;
+}
+
+.hero-content {
+  max-width: 800px;
+  animation: slideUp 1.2s ease;
+}
+
+.hero-logo {
+  width: 180px;
+  margin-bottom: 30px;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  transition: transform 0.4s ease;
+}
+
+.hero-logo:hover {
+  transform: scale(1.05);
+}
+
+.hero h1 {
+  font-size: 2rem;
+  color: #333;
+  font-weight: 600;
+  line-height: 1.4;
+  text-shadow: 0 2px 8px rgba(255, 255, 255, 0.6);
+}
+
+/* Efectos suaves al entrar */
+@keyframes slideUp {
+  0% { opacity: 0; transform: translateY(40px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+/* === CATÁLOGO === */
+.catalogo-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+  margin-top: 40px;
+  justify-items: center;
+}
+
+
+.catalogo-grid .item {
+  background: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(8px);
+  border-radius: 15px;
+  overflow: hidden;
+  text-align: center;
+  padding-bottom: 20px;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.catalogo-grid .item:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+}
+
+.catalogo-grid img {
+  width: 100%;
+  height: 340px;
+  object-fit: cover;
+  border-bottom: 2px solid #e0d9f7;
+}
+
+.catalogo-grid h3 {
+  margin-top: 15px;
+  color: #6a3dfc;
+  font-weight: 600;
+}
+
+.catalogo-grid p {
+  color: #444;
+  padding: 0 15px;
+  font-size: 0.95em;
+}
+
+.lista-telas {
+  list-style: none;
+  padding: 0;
+  margin-top: 40px;
+  font-size: 1em;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  justify-content: center;
+}
+
+.lista-telas li {
+  background: rgba(255,255,255,0.6);
+  border-radius: 20px;
+  padding: 8px 18px;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.05);
+  transition: transform 0.3s;
+}
+
+.lista-telas li:hover {
+  transform: scale(1.05);
+  background: rgba(255,255,255,0.8);
+}
+
+/* === ENCABEZADO === */
+header.hero {
+  text-align: center;
+  padding: 100px 20px;
+  color: #4a3b5f;
+  background: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  margin: 30px auto;
+  width: 90%;
+  box-shadow: 0 4px 25px rgba(0, 0, 0, 0.1);
+}
+
+.logo {
+  width: 200px;
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+/* === NAVBAR === */
+.navbar {
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+  background: rgba(255, 255, 255, 0.7);
+  padding: 15px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  backdrop-filter: blur(10px);
+  border-radius: 0 0 15px 15px;
+}
+
+.navbar a {
+  text-decoration: none;
+  color: #6a3dfc;
+  font-weight: 600;
+  transition: all 0.3s;
+}
+
+.navbar a:hover {
+  color: #ff6ad5;
+  transform: scale(1.1);
+}
+
+/* === SECCIONES === */
+.section {
+  padding: 80px 20px;
+  text-align: center;
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 1s ease, transform 1s ease;
+}
+
+.section.visible {
+  opacity: 1;
+  transform: translateY(0);
+  background: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(8px);
+  border-radius: 20px;
+  margin: 40px auto;
+  width: 90%;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+/* === GALERÍA === */
+.galeria-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.galeria-grid img {
+  width: 100%;
+  border-radius: 12px;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.galeria-grid img:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+}
+
+/* === FOOTER === */
+footer {
+  text-align: center;
+  padding: 20px;
+  background: rgba(255,255,255,0.7);
+  box-shadow: 0 -2px 8px rgba(0,0,0,0.05);
+  border-radius: 15px 15px 0 0;
+  color: #5a4a7f;
+}
+/* === EFECTO INTERACTIVO HERO === */
+.hero {
+  position: relative;
+  background: radial-gradient(circle at center, #fff6b3, #f8d6ff, #c6c2ff);
+  transition: background 0.2s ease;
+  overflow: hidden;
+}
+
+/* Luz suave que sigue el mouse */
+.hero::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at var(--x, 50%) var(--y, 50%), rgba(255, 255, 255, 0.4), transparent 50%);
+  transition: background 0.1s ease;
+  z-index: 1;
+  pointer-events: none;
+}
+body {
+  transition: background 0.3s ease;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+}
+/* === EFECTO DE COLOR INTERACTIVO GLOBAL === */
+body {
+  background: radial-gradient(circle at center, #fff6b3, #f8d6ff, #c6c2ff);
+  transition: background 0.2s ease;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* Luz suave que sigue el cursor */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at var(--x, 50%) var(--y, 50%), rgba(255,255,255,0.3), transparent 50%);
+  pointer-events: none;
+  transition: background 0.1s ease;
+  z-index: 1;
+}
+
+/* Asegura que el contenido quede por encima */
+main, header, section, footer {
+  position: relative;
+  z-index: 2;
+}
+/* === EFECTO GLOBAL INTERACTIVO DE COLOR === */
+body {
+  background: radial-gradient(circle at center, #fff6b3, #f8d6ff, #c6c2ff);
+  transition: background 0.3s ease;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* Luz suave que sigue al cursor */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at var(--x, 50%) var(--y, 50%), rgba(255,255,255,0.25), transparent 50%);
+  pointer-events: none;
+  transition: background 0.1s ease;
+  z-index: 1;
+}
+
+/* Asegura que todo el contenido quede encima */
+header, main, section, footer {
+  position: relative;
+  z-index: 2;
+}
+/* === AJUSTES PARA CELULAR === */
+@media (max-width: 768px) {
+  .hero h1 {
+    font-size: 1.6rem;
+    padding: 0 15px;
+  }
+
+  .hero-logo {
+    width: 130px;
+    margin-bottom: 20px;
+  }
+
+  .navbar {
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 10px;
+  }
+
+  .catalogo-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .catalogo-grid img {
+    height: 280px;
+  }
+
+  .section {
+    padding: 60px 10px;
+  }
+
+  footer {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero h1 {
+    font-size: 1.3rem;
+  }
+
+  .navbar a {
+    font-size: 0.9rem;
+  }
+
+  .lista-telas {
+    flex-direction: column;
+  }
+
+  .lista-telas li {
+    width: 100%;
+    text-align: center;
+  }
+}
+.catalogo-grid img {
+  width: 100%;
+  height: 380px;
+  object-fit: contain; /* evita cortes */
+  background: transparent;
+  border-bottom: 2px solid #ffffff;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+/* === GUIA DE COLORES === */
+.color-bar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 40px;
+}
+
+.color {
+  width: 60px;
+  height: 60px;
+  border-radius: 12px;
+  background: var(--clr);
+  transition: all 0.4s ease;
+  position: relative;
+  cursor: pointer;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+}
+
+.color:hover {
+  transform: scale(1.4);
+  z-index: 10;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
+}
+
+/* Nombre del color flotante */
+.color::after {
+  content: attr(data-nombre);
+  position: absolute;
+  bottom: -25px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #333;
+  font-size: 0.8em;
+  background: rgba(255, 255, 255, 0.8);
+  padding: 3px 8px;
+  border-radius: 8px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.color:hover::after {
+  opacity: 1;
+}
