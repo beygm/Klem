@@ -382,57 +382,127 @@ header, main, section, footer {
   z-index: 2;
 }
 
-/* === AJUSTES PARA CELULAR === */
-@media (max-width: 768px) {
-  .hero h1 {
-    font-size: 1.6rem;
-    padding: 0 15px;
-  }
+/* === CORRECCIÓN GLOBAL MÓVIL Y CENTRADO === */
 
-  .hero-logo {
-    width: 130px;
-    margin-bottom: 20px;
-  }
-
-  .navbar {
-    flex-wrap: wrap;
-    gap: 10px;
-    padding: 10px;
-  }
-
-  .catalogo-grid {
-    grid-template-columns: 1fr;
-    gap: 20px;
-  }
-
-  .catalogo-grid img {
-    height: 280px;
-  }
-
-  .section {
-    padding: 60px 10px;
-  }
-
-  footer {
-    font-size: 0.9rem;
-  }
+/* Previene desplazamiento y solapamiento */
+html, body {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  box-sizing: border-box;
 }
 
-@media (max-width: 480px) {
-  .hero h1 {
-    font-size: 1.3rem;
-  }
+/* Evita que se superpongan capas */
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
 
+/* Ajusta secciones principales */
+.hero,
+.section,
+.catalogo-grid,
+.telas-grid,
+footer {
+  width: 100%;
+  max-width: 100vw;
+  margin: 0 auto;
+  overflow: visible;
+}
+
+/* Corrige el hero y logo centrado */
+.hero {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 60px 15px;
+}
+
+.hero-logo {
+  width: 160px;
+  height: auto;
+  display: block;
+  margin: 0 auto 20px;
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Evita que el texto del hero se monte */
+.hero-content {
+  max-width: 90%;
+  z-index: 3;
+  position: relative;
+}
+
+/* Corrige catálogo y telas en móviles */
+.catalogo-grid,
+.telas-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 30px;
+  justify-items: center;
+  padding: 0 10px;
+}
+
+/* Asegura imágenes responsivas */
+.catalogo-grid img,
+.telas-grid img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  border-radius: 10px;
+}
+
+/* Centra y organiza el navbar */
+.navbar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  text-align: center;
+  padding: 10px;
+  position: sticky;
+  top: 0;
+  background: rgba(255,255,255,0.7);
+  z-index: 100;
+  border-radius: 0 0 12px 12px;
+}
+
+/* Ajusta títulos y párrafos para no romper diseño */
+.section h2,
+.section h3,
+.section p {
+  word-wrap: break-word;
+  margin: 0 auto 15px;
+  max-width: 90%;
+}
+
+/* FOOTER ajustado */
+footer {
+  font-size: 0.9rem;
+  line-height: 1.5;
+  padding: 20px 10px;
+}
+
+/* Ajuste específico para pantallas muy pequeñas */
+@media (max-width: 480px) {
+  .hero {
+    padding: 40px 10px;
+  }
+  .hero-logo {
+    width: 130px;
+  }
+  .hero h1 {
+    font-size: 1.4rem;
+  }
   .navbar a {
     font-size: 0.9rem;
   }
-
-  .lista-telas {
-    flex-direction: column;
-  }
-
-  .lista-telas li {
-    width: 100%;
-    text-align: center;
+  .section {
+    padding: 50px 10px;
   }
 }
